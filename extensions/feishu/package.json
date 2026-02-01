@@ -1,0 +1,38 @@
+{
+  "name": "@openclaw/feishu",
+  "version": "2026.1.29",
+  "type": "module",
+  "description": "OpenClaw Feishu channel plugin",
+  "openclaw": {
+    "extensions": [
+      "./index.ts"
+    ],
+    "channel": {
+      "id": "feishu",
+      "label": "Feishu",
+      "selectionLabel": "Feishu (Open Platform)",
+      "detailLabel": "Feishu",
+      "docsPath": "/channels/feishu",
+      "docsLabel": "feishu",
+      "blurb": "Feishu Open Platform events + bot replies.",
+      "aliases": [
+        "lark"
+      ],
+      "order": 65
+    },
+    "install": {
+      "npmSpec": "@openclaw/feishu",
+      "localPath": "extensions/feishu",
+      "defaultChoice": "npm"
+    }
+  },
+  "dependencies": {
+    "@larksuiteoapi/node-sdk": "^1.40.1"
+  },
+  "devDependencies": {
+    "openclaw": "workspace:*"
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.1.26"
+  }
+}

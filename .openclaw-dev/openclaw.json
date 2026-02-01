@@ -1,0 +1,28 @@
+{
+  "gateway": {
+    "mode": "local",
+    "bind": "loopback"
+  },
+  "agents": {
+    "defaults": {
+      "workspace": "/Users/wuxiaomu/.openclaw/workspace-dev",
+      "skipBootstrap": true
+    },
+    "list": [
+      {
+        "id": "dev",
+        "default": true,
+        "workspace": "/Users/wuxiaomu/.openclaw/workspace-dev",
+        "identity": {
+          "name": "C3-PO",
+          "theme": "protocol droid",
+          "emoji": "🤖"
+        }
+      }
+    ]
+  },
+  "meta": {
+    "lastTouchedVersion": "2026.1.29",
+    "lastTouchedAt": "2026-01-31T04:25:57.676Z"
+  }
+}
