@@ -49,6 +49,7 @@ PY
   fi
 fi
 export OPENCLAW_GATEWAY_TOKEN
+SKIP_ONBOARD="${OPENCLAW_SKIP_ONBOARD:-}"
 
 COMPOSE_FILES=("$COMPOSE_FILE")
 COMPOSE_ARGS=()
@@ -177,16 +178,22 @@ docker build \
   -f "$ROOT_DIR/Dockerfile" \
   "$ROOT_DIR"
 
-echo ""
-echo "==> Onboarding (interactive)"
-echo "When prompted:"
-echo "  - Gateway bind: lan"
-echo "  - Gateway auth: token"
-echo "  - Gateway token: $OPENCLAW_GATEWAY_TOKEN"
-echo "  - Tailscale exposure: Off"
-echo "  - Install Gateway daemon: No"
-echo ""
-docker compose "${COMPOSE_ARGS[@]}" run --rm openclaw-cli onboard --no-install-daemon
+if [[ "${SKIP_ONBOARD,,}" == "1" || "${SKIP_ONBOARD,,}" == "true" || "${SKIP_ONBOARD,,}" == "yes" ]]; then
+  echo ""
+  echo "==> Onboarding skipped (OPENCLAW_SKIP_ONBOARD=${SKIP_ONBOARD})"
+  echo "    Using existing config in $OPENCLAW_CONFIG_DIR"
+else
+  echo ""
+  echo "==> Onboarding (interactive)"
+  echo "When prompted:"
+  echo "  - Gateway bind: lan"
+  echo "  - Gateway auth: token"
+  echo "  - Gateway token: $OPENCLAW_GATEWAY_TOKEN"
+  echo "  - Tailscale exposure: Off"
+  echo "  - Install Gateway daemon: No"
+  echo ""
+  docker compose "${COMPOSE_ARGS[@]}" run --rm openclaw-cli onboard --no-install-daemon
+fi
 
 echo ""
 echo "==> Provider setup (optional)"
